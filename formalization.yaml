@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "A universal group with thirteen relators"
+  description: >-
+    Lean 4 proof that there exists a presentation with two generators
+    and thirteen relators whose group contains an isomorphic copy of
+    every finitely presented group. The construction combines a universal
+    finitely presented input, positive preparation, word recognition, a
+    six-generator nineteen-relator host, and a final HNN compression.
+  authors: ["Qiuyu Ren"]
+  responsible_maintainers: ["Qiuyu Ren"]
+  license: "MIT"
+
+repository:
+  role: substantive-development
+
+classification:
+  arxiv: [math.GR]
+
+status:
+  scope: >-
+    Existence of one two-generator thirteen-relator presentation whose group
+    contains every finitely presented group as a subgroup.
+    The main theorem is in UniversalGroup.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+  main_results:
+    - declaration: UniversalGroup.exists_two_generator_thirteen_relator_universal_group
+      file: UniversalGroup.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+
+sources:
+  - title: "Embedding Theorems for Groups"
+    authors: ["Graham Higman", "B. H. Neumann", "Hanna Neumann"]
+    type: paper
+    id: "https://doi.org/10.1112/jlms/s1-24.4.247"
+    relationship: background
+  - title: "Subgroups of finitely presented groups"
+    authors: ["Graham Higman"]
+    type: paper
+    id: "https://doi.org/10.1098/rspa.1961.0132"
+    relationship: adapts
+  - title: "Universal group with twenty-one defining relations"
+    authors: ["M. K. Valiev"]
+    type: paper
+    id: "https://doi.org/10.1016/0012-365X(77)90153-4"
+    relationship: adapts
+    note: >-
+      Background for the recognition and embedding tower. The final
+      thirteen-relator compression is recorded in FORMALIZATION.md and
+      proved in this project, not stated in Valiev's paper.
+  - title: "Small undecidable groups and unrecognizable 4-manifolds"
+    authors: ["Marc Kegel", "Shana Yunsheng Li", "Qiuyu Ren"]
+    type: paper
+    id: "https://arxiv.org/abs/2609.10461v1"
+    relationship: adapts
+    note: >-
+      Simulator subgroup results: Propositions 3.3–3.4 (attributed there to
+      Borisov's Assertions IV–V), Lemma 3.5, and Corollaries 3.6–3.7.
+      Their counterparts are proved in this library for the input-dependent
+      SupportedRules datum. The first HNN symmetry (proof of Lemma 2.2 using
+      Lemma 3.1) is also adapted, with a positive-sign variant in the host.
+      See FORMALIZATION.md for the full bibliography and proof links.
+related_formalizations:
+  - id: "https://github.com/32805433/Adian-Rabin"
+    relationship: adapts
+    note: >-
+      Finite-presentation, HNN, simulator, and machine-compilation code was
+      reused and adapted from the earlier project. A precise upstream
+      revision has not been established. Adapted sources are included locally;
+      the upstream MIT copyright notice is retained in LICENSE.
+
+automation:
+  methods:
+    - method: agent
+      models: ["GPT-6 Astra"]
+      role: >-
+        Essentially all repository content, including the Lean formalization
+        and documentation, was produced under human
+        direction, including adaptation of existing formalized arguments.
+
+review:
+  status: self-assessed
+  notes: >-
+    Verification uses Lean compilation and a Lean axiom audit of the main
+    theorem and intermediate results. GitHub Actions builds the library
+    with warnings treated as failures and runs the audit. An independent
+    challenge and comparator configuration are supplied; no external Lean
+    comparator run or independent mathematical review is recorded.
+    See VERIFICATION.md for reproduction instructions.
+
+known_gaps: []
+limitations:
+  - "The single intentional sorry in Challenge.lean is a comparator target, not a proof."
+  - "The proof audit permits only propext, Classical.choice, and Quot.sound."

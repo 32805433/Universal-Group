@@ -1,0 +1,13 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "UniversalGroup",
+  "theorem_names": [
+    "UniversalGroup.exists_two_generator_thirteen_relator_universal_group"
+  ],
+  "permitted_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "enable_nanoda": false
+}

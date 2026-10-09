@@ -1,0 +1,17 @@
+name = "universal_group"
+version = "0.1.0"
+keywords = ["math", "group-theory", "computability"]
+packagesDir = ".lake/packages"
+defaultTargets = ["UniversalGroup"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.35.0-rc2"
+
+[[lean_lib]]
+name = "UniversalGroup"
+globs = ["UniversalGroup", "UniversalGroup.+"]
+
+[[lean_lib]]
+name = "Challenge"
